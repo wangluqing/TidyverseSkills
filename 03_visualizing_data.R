@@ -84,7 +84,22 @@ Davis %>% View
 # 7）确保对比清晰可见
 # 8）确保y坐标轴从0开始
 # 9）Keep is simple
-# 10）
+
+
+library(tidyverse)
+
+diamonds <- as_tibble(diamonds)
+diamonds
+
+# 理解元数据，弄清楚每个变量的字段含义
+help("diamonds")
+
+# 散点图
+# 研究钻石重量和价格的关系
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price))
+
+
 
 # 相关资料：
 # 1 https://r-graph-gallery.com/
