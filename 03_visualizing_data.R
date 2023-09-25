@@ -100,6 +100,144 @@ ggplot(data = diamonds) +
   geom_point(mapping = aes(x = carat, y = price))
 
 
+# 数据可视化
+# 1 ggplot2简介
+# 2 可视化增强
+# 3 可视化其他
+
+# ggplot2简介
+# tidyverse的核心库
+# 设计和构建强大且高度可定制的可视化
+# Hadley Wickham 2015
+# 图形语法
+# 图形分层的概念和逻辑
+
+library(tidyverse)
+library(datasets)
+library(patchwork)
+
+data('mtcars')
+
+# 图形语法7个要素
+# 1 数据，用于可视化的数据
+# 2 几何形状，用于绘制的图形类型
+# 几何形状的选择，要绘制的数据和要传递的信息
+# 3 Aesthetics，图形中可以看到，例如x,y轴，颜色，几何形状，透明度，线宽和类型
+# 4 统计，可选项，计数或者求和，或者回归曲线拟合
+# 5 坐标，笛卡尔坐标或者极坐标
+# 6 Facets，同一幅图实现分组观察
+# 7 Themes，装饰和美观
+
+# ggplot2包绘图基础
+# 4个问题
+# 1）使用什么样的数据集？（数据获取和整理）
+# 2）绘制什么样类型的图形？（依赖数据和传递信息）
+# 3）坐标轴分别是什么？
+# 4）图形标题是什么？
+
+# 类似模板
+# What is the dataset to be used?
+ggplot(data) +
+  # What kind of graphic to be plotted? (scatterplot)
+  geom_point(
+    # What goes on the X and Y axes?
+    mapping= aes(x= X, y= Y) ) +
+  # What is the title?
+  ggtitle('Title for my graphic')
+
+# 创建数据集
+set.seed(1234)
+df <- data.frame(
+  var1 = runif(20),
+  var2 = rnorm(20))
+# What is the dataset to be used?
+ggplot(df) +
+  # What kind of graphic?
+  geom_point(
+    # What goes on X and Y?
+    mapping= aes(x=var1, y=var2 ) ) +
+  # What is the graphic title?
+  ggtitle('My first ggplot2 graphic')
+
+# 直方图
+# 研究单变量的分布
+# 采用了分箱技术
+df <- mtcars
+# What is the dataset to be used?
+ggplot(df) +
+  # What kind of graphic?
+  geom_histogram(
+    # What goes on x, what is the color, fill color and number of bins?
+      mapping= aes(x= mpg), 
+      bins= 5,
+      color="red", 
+      fill="royalblue") +
+  # What is the graphic title?
+  ggtitle("Histogram of Miles per Gallon")
+
+# 备注：
+# color="lightgray" and fill="royalblue" to set up the border and filling color of the bars
+
+# 盒箱图
+# 1）发现异常值
+# 2）比较不同组的差异分析
+# 单个连续变量的盒箱图
+# Boxplot of MPG
+# Dataset
+ggplot( df ) +
+  # Geometry, Y and filling color
+  geom_boxplot( aes(y=mpg), fill="royalblue" ) +
+  # title
+  ggtitle("Boxplot of Miles per gallon")
+# 不同组下单个连续变量的盒箱图
+# Dataset
+ggplot( df ) +
+  # Geometry, X, Y and filling color
+  geom_boxplot( aes(x= factor(vs), y=mpg), fill="royalblue" ) +
+  # overwrite the X label
+  labs(x="Engine shape") +
+  # Title
+  ggtitle("A comparison between V-shaped vs line-shaped engines
+and the effect on MPG")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 相关资料：
 # 1 https://r-graph-gallery.com/
